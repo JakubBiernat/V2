@@ -46,7 +46,7 @@ public class MainFrame extends JFrame implements ActionListener {
         button1.setBorder(BorderFactory.createEtchedBorder());
 
 
-        //Part searcher button
+        //GD&T button
         button2 = new JButton();
         button2.setText("GD&T- GRD norm");
         button2.setIcon(partIcon);
@@ -81,7 +81,7 @@ public class MainFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==button1){
             new MatSearch();
-            System.out.println("button "+button1.getName()+" selected");
+            System.out.println("button "+button1.getText()+" selected");
         }
         if(e.getSource()==button2){
             System.out.println("button"+button2.getName()+"selected");

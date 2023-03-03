@@ -9,22 +9,15 @@ import java.util.HashMap;
 
 public class FrameA extends JFrame {
 
-    private JLabel labelMain;
-    private JPanel panelA;
-    private JPanel panelB;
-    private JLabel paneleuList;
-    private JLabel panelnaList;
-    private JList euList;
-    private JList naList;
+    private JList<String> euList;
+    private JList<String> naList;
 
     private JPanel euListPanel;
     private JPanel naListPanel;
     private JTextField area;
-    private String s = null;
-    private HashMap<String,String> mapa = new HashMap();
-    private HashMap<String,String> mapaTurnout = new HashMap();
+    private final HashMap<String,String> mapa = new HashMap<>();
 
-    private ArrayList<Steel> steellist;
+    private final ArrayList<Steel> steellist;
     private JTextArea result;
 
     FrameA(ArrayList<Steel> steellist){
@@ -39,10 +32,10 @@ public class FrameA extends JFrame {
         area.addActionListener(new AreaActionListener());
 
         //Top label
-        labelMain = new JLabel("Please type material or select from one of the list below:");
+        JLabel labelMain = new JLabel("Please type material or select from one of the list below:");
 
-        panelA = new JPanel();
-        panelB = new JPanel();
+        JPanel panelA = new JPanel();
+        JPanel panelB = new JPanel();
         result = new JTextArea();
         result.setSize(800,400);
 
@@ -68,7 +61,7 @@ public class FrameA extends JFrame {
         MainContent.add(naListPanel);
 
         panelB.add(labelMain);
-        panelB.add(area);;
+        panelB.add(area);
         panelA.add(result);
 
 
@@ -90,12 +83,10 @@ public class FrameA extends JFrame {
 
         for (Steel e:steellist) {
             mapa.put(e.geteuName(),e.getaName());
-            mapaTurnout.put(e.getaName(),e.geteuName());
-            showinfo(e);
         }
 
-        euList = new JList(mapa.keySet().toArray(new String[mapa.size()]));
-        naList = new JList(mapa.values().toArray(new String[mapa.size()]));
+        euList = new JList<>(mapa.keySet().toArray(new String[mapa.size()]));
+        naList = new JList<>(mapa.values().toArray(new String[mapa.size()]));
 
         euList.setFixedCellWidth(200);
         naList.setFixedCellWidth(200);
@@ -120,25 +111,43 @@ public class FrameA extends JFrame {
     }
 
     String showinfo(Steel steel){
-
-
         StringBuilder sb = new StringBuilder();
-        sb.append("Material equivalent for "+s+ " is " +mapa.get(s)+ "\n"+"\n");
+        sb.append("Material equivalent for ").append(steel.geteuName()).append(" is ").append(steel.getaName()).append("\n").append("\n");
         sb.append("Details:"+"\n");
-        sb.append(steel.getDescription()+"\n"+"\n");
-        sb.append("Steel name according to EU norm " + steel.geteuName() + "\n");
-        sb.append("Steel name according to NA norm " + steel.getaName() + "\n");
-        sb.append("Steel name according to PL norm " + steel.getplName() + "\n");
-        sb.append("Steel name according to DIN norm " + steel.getdinName() + "\n");
+        sb.append(steel.getDescription()).append("\n").append("\n");
+        sb.append("Steel name according to EU norm ").append(steel.geteuName()).append("\n");
+        sb.append("Steel name according to NA norm ").append(steel.getaName()).append("\n");
+        sb.append("Steel name according to PL norm ").append(steel.getplName()).append("\n");
+        sb.append("Steel name according to DIN norm ").append(steel.getdinName()).append("\n");
         return (sb.toString());
+    }
 
+
+
+    private void check(String s){
+        result.setText(null);
+        if(mapa.containsKey(s)){
+            for (Steel o: steellist){
+                if(s.equals(o.geteuName())){
+                    System.out.println(showinfo(o));
+                    result.append(showinfo(o));
+                }
+            }
+        }
+        if(mapa.containsValue(s)){
+            for (Steel o: steellist){
+                if(s.equals(o.getaName())) {
+                    System.out.println(showinfo(o));
+                    result.append(showinfo(o));
+                }
+            }
+        }
     }
 
     class AreaActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            s= area.getText();
-            check();
+            check(area.getText());
         }
     }
 
@@ -146,8 +155,7 @@ public class FrameA extends JFrame {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             if(!e.getValueIsAdjusting()) {
-                s= (String)euList.getSelectedValue();
-                check();
+                check(euList.getSelectedValue());
             }
         }
     }
@@ -156,35 +164,8 @@ public class FrameA extends JFrame {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             if(!e.getValueIsAdjusting()) {
-                s= (String)naList.getSelectedValue();
-                check();
+                check(naList.getSelectedValue());
             }
         }
-    }
-
-    private void check(){
-        result.setText(null);
-        if(mapa.containsKey(s)){
-
-            for (Steel o: steellist){
-                if(s == o.geteuName()){
-                    System.out.println(showinfo(o));
-                    result.replaceSelection(showinfo(o));
-                }
-            }
-        }
-
-        if(mapaTurnout.containsKey(s)){
-            for (Steel o: steellist){
-                if(s == o.getaName()) {
-                    System.out.println(showinfo(o));
-                    result.replaceSelection(showinfo(o));
-                }
-                }
-        }
-
-        panelA.repaint();
-        panelB.repaint();
-
     }
 }
