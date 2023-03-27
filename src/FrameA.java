@@ -29,7 +29,7 @@ public class FrameA extends JFrame {
 
         // text area to type material
         area = new JTextField((10));
-        area.addActionListener(new AreaActionListener());
+        area.addActionListener((e)-> check(area.getText()));
 
         //Top label
         JLabel labelMain = new JLabel("Please type material or select from one of the list below:");
@@ -93,8 +93,14 @@ public class FrameA extends JFrame {
         euList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         naList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        euList.addListSelectionListener(new euListListener());
-        naList.addListSelectionListener(new naListListener());
+        euList.addListSelectionListener(
+                (e) -> {if(!e.getValueIsAdjusting()) {
+                        check(euList.getSelectedValue());}
+                        });
+        naList.addListSelectionListener(
+                (e) -> {if(!e.getValueIsAdjusting()) {
+                        check(naList.getSelectedValue());}
+                        });
 
         JScrollPane moveeuList = new JScrollPane(euList);
         moveeuList.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -144,28 +150,7 @@ public class FrameA extends JFrame {
         }
     }
 
-    class AreaActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            check(area.getText());
-        }
-    }
 
-    class euListListener implements ListSelectionListener {
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if(!e.getValueIsAdjusting()) {
-                check(euList.getSelectedValue());
-            }
-        }
-    }
 
-    class naListListener implements ListSelectionListener{
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if(!e.getValueIsAdjusting()) {
-                check(naList.getSelectedValue());
-            }
-        }
-    }
+
 }

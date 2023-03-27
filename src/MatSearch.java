@@ -1,14 +1,10 @@
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.*;
-import java.awt.event.*;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MatSearch {
 
-    ArrayList<Steel> steellist = new ArrayList<>();
+   private final  ArrayList<Steel> steellist = new ArrayList<>();
 
     MatSearch() {
 

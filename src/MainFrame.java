@@ -1,17 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class MainFrame extends JFrame implements ActionListener {
+public class MainFrame extends JFrame {
 
-   private JButton button1, button2, button3;
-   private JPanel main;
+    private JButton button1, button2, button3;
+    private JPanel main;
 
 
     MainFrame() {
         createButtons();
         createPanels();
+
 
         //Frame definition
         this.setTitle("Useful tool");
@@ -26,6 +25,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private void createButtons() {
 
+
         //Some pictures for buttons
         ImageIcon metalIcon = new ImageIcon("austenit.png");
         ImageIcon partIcon = new ImageIcon("partsicon.png");
@@ -36,7 +36,9 @@ public class MainFrame extends JFrame implements ActionListener {
         button1.setText("Metal equivalent");
         button1.setIcon(metalIcon);
         button1.setBounds(100, 10, 200, 250);
-        button1.addActionListener(this);
+        button1.addActionListener(
+                (e)->{new MatSearch();
+                      System.out.println("button "+button1.getText()+" selected");} );
         button1.setFocusable(false);
         button1.setHorizontalTextPosition(JButton.CENTER);
         button1.setVerticalTextPosition(JButton.BOTTOM);
@@ -51,7 +53,7 @@ public class MainFrame extends JFrame implements ActionListener {
         button2.setText("GD&T- GRD norm");
         button2.setIcon(partIcon);
         button2.setBounds(400, 10, 200, 250);
-        button2.addActionListener(this);
+        button2.addActionListener((e)-> System.out.println("button"+button2.getName()+"selected"));
         button2.setFocusable(false);
         button2.setHorizontalTextPosition(JButton.CENTER);
         button2.setVerticalTextPosition(JButton.BOTTOM);
@@ -66,7 +68,7 @@ public class MainFrame extends JFrame implements ActionListener {
         button3.setText("HS overlapping calculator");
         button3.setIcon(calcIcon);
         button3.setBounds(700, 10, 200, 250);
-        button3.addActionListener(this);
+        button3.addActionListener((e)-> System.out.println("button"+button3.getName()+"selected"));
         button3.setFocusable(false);
         button3.setHorizontalTextPosition(JButton.CENTER);
         button3.setVerticalTextPosition(JButton.BOTTOM);
@@ -77,6 +79,7 @@ public class MainFrame extends JFrame implements ActionListener {
         button3.setEnabled(false);/*to be defined later*/
     }
 
+    /*
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==button1){
@@ -90,7 +93,7 @@ public class MainFrame extends JFrame implements ActionListener {
         if(e.getSource()==button3){
             System.out.println("button"+button3.getName()+"selected");
         }
-    }
+    }*/
 
     private void createPanels(){
 
