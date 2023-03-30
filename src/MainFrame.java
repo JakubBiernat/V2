@@ -3,80 +3,77 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
-    private JButton button1, button2, button3;
-    private JPanel main;
+    private JButton materialSearchButton, gdtInstructionButton, overlapCalcButton;
+    private JPanel mainPanel;
 
 
     MainFrame() {
         createButtons();
         createPanels();
+        createFrame();
+    }
 
-
-        //Frame definition
+    private void createFrame() {
         this.setTitle("Useful tool");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         this.setSize(1050,500);
         this.setVisible(true);
-        this.getContentPane().add(BorderLayout.CENTER,main);
+        this.getContentPane().add(BorderLayout.CENTER, mainPanel);
         this.setBackground(new Color(150,150,150));
         this.setResizable(false);
     }
 
     private void createButtons() {
-
-
         //Some pictures for buttons
         ImageIcon metalIcon = new ImageIcon("austenit.png");
         ImageIcon partIcon = new ImageIcon("partsicon.png");
         ImageIcon calcIcon = new ImageIcon("calcicon.png");
 
-        //Metal choice button
-        button1 = new JButton();
-        button1.setText("Metal equivalent");
-        button1.setIcon(metalIcon);
-        button1.setBounds(100, 10, 200, 250);
-        button1.addActionListener(
-                (e)->{new MatSearch();
-                      System.out.println("button "+button1.getText()+" selected");} );
-        button1.setFocusable(false);
-        button1.setHorizontalTextPosition(JButton.CENTER);
-        button1.setVerticalTextPosition(JButton.BOTTOM);
-        button1.setFont(new Font("Comic Sans", Font.BOLD, 20));
-        button1.setIconTextGap(20);
-        button1.setBackground(Color.lightGray);
-        button1.setBorder(BorderFactory.createEtchedBorder());
-
+        //Steel choice button
+        materialSearchButton = new JButton();
+        materialSearchButton.setText("Metal equivalent");
+        materialSearchButton.setIcon(metalIcon);
+        materialSearchButton.setBounds(100, 10, 200, 250);
+        materialSearchButton.addActionListener(
+                (e)->{new FrameA(new MatSearch().dataReader());
+                      System.out.println("button "+ materialSearchButton.getText()+" selected");} );
+        materialSearchButton.setFocusable(false);
+        materialSearchButton.setHorizontalTextPosition(JButton.CENTER);
+        materialSearchButton.setVerticalTextPosition(JButton.BOTTOM);
+        materialSearchButton.setFont(new Font("Comic Sans", Font.BOLD, 20));
+        materialSearchButton.setIconTextGap(20);
+        materialSearchButton.setBackground(Color.lightGray);
+        materialSearchButton.setBorder(BorderFactory.createEtchedBorder());
 
         //GD&T button
-        button2 = new JButton();
-        button2.setText("GD&T- GRD norm");
-        button2.setIcon(partIcon);
-        button2.setBounds(400, 10, 200, 250);
-        button2.addActionListener((e)-> System.out.println("button"+button2.getName()+"selected"));
-        button2.setFocusable(false);
-        button2.setHorizontalTextPosition(JButton.CENTER);
-        button2.setVerticalTextPosition(JButton.BOTTOM);
-        button2.setFont(new Font("Comic Sans", Font.BOLD, 20));
-        button2.setIconTextGap(20);
-        button2.setBackground(Color.lightGray);
-        button2.setBorder(BorderFactory.createEtchedBorder());
-        button2.setEnabled(false); /* to be defined later*/
+        gdtInstructionButton = new JButton();
+        gdtInstructionButton.setText("GD&T- GRD norm");
+        gdtInstructionButton.setIcon(partIcon);
+        gdtInstructionButton.setBounds(400, 10, 200, 250);
+        gdtInstructionButton.addActionListener((e)-> System.out.println("button"+ gdtInstructionButton.getName()+"selected"));
+        gdtInstructionButton.setFocusable(false);
+        gdtInstructionButton.setHorizontalTextPosition(JButton.CENTER);
+        gdtInstructionButton.setVerticalTextPosition(JButton.BOTTOM);
+        gdtInstructionButton.setFont(new Font("Comic Sans", Font.BOLD, 20));
+        gdtInstructionButton.setIconTextGap(20);
+        gdtInstructionButton.setBackground(Color.lightGray);
+        gdtInstructionButton.setBorder(BorderFactory.createEtchedBorder());
+        gdtInstructionButton.setEnabled(false); /* to be defined later*/
 
         // Overlapping calculator button
-        button3 = new JButton();
-        button3.setText("HS overlapping calculator");
-        button3.setIcon(calcIcon);
-        button3.setBounds(700, 10, 200, 250);
-        button3.addActionListener((e)-> System.out.println("button"+button3.getName()+"selected"));
-        button3.setFocusable(false);
-        button3.setHorizontalTextPosition(JButton.CENTER);
-        button3.setVerticalTextPosition(JButton.BOTTOM);
-        button3.setFont(new Font("Comic Sans", Font.BOLD, 20));
-        button3.setIconTextGap(20);
-        button3.setBackground(Color.lightGray);
-        button3.setBorder(BorderFactory.createEtchedBorder());
-        button3.setEnabled(false);/*to be defined later*/
+        overlapCalcButton = new JButton();
+        overlapCalcButton.setText("HS overlapping calculator");
+        overlapCalcButton.setIcon(calcIcon);
+        overlapCalcButton.setBounds(700, 10, 200, 250);
+        overlapCalcButton.addActionListener((e)-> System.out.println("button"+ overlapCalcButton.getName()+"selected"));
+        overlapCalcButton.setFocusable(false);
+        overlapCalcButton.setHorizontalTextPosition(JButton.CENTER);
+        overlapCalcButton.setVerticalTextPosition(JButton.BOTTOM);
+        overlapCalcButton.setFont(new Font("Comic Sans", Font.BOLD, 20));
+        overlapCalcButton.setIconTextGap(20);
+        overlapCalcButton.setBackground(Color.lightGray);
+        overlapCalcButton.setBorder(BorderFactory.createEtchedBorder());
+        overlapCalcButton.setEnabled(false);/*to be defined later*/
     }
 
     /*
@@ -97,32 +94,31 @@ public class MainFrame extends JFrame {
 
     private void createPanels(){
 
-        JPanel panelA =new JPanel();
-        JPanel panelUpper =new JPanel();
-        panelUpper.setBackground(Color.gray);
+        JPanel panelInner =new JPanel();
+        JPanel panelInnerHeadline =new JPanel();
+        panelInnerHeadline.setBackground(Color.gray);
 
-        JLabel head = new JLabel();
-        head.setText("Please select button:");
-        head.setFont(new Font("Comic Sans",Font.BOLD,20));
-        head.setBounds(100,30,800,60);
-        head.setHorizontalTextPosition(JLabel.CENTER);
+        JLabel headline = new JLabel();
+        headline.setText("Please select button:");
+        headline.setFont(new Font("Comic Sans",Font.BOLD,20));
+        headline.setBounds(100,30,800,60);
+        headline.setHorizontalTextPosition(JLabel.CENTER);
 
-        panelUpper.setLayout(null);
-        panelUpper.add(head);
-        panelUpper.setPreferredSize(new Dimension(500,10));
+        panelInnerHeadline.setLayout(null);
+        panelInnerHeadline.add(headline);
+        panelInnerHeadline.setPreferredSize(new Dimension(500,10));
 
-        panelA.setLayout(null);
-        panelA.add(button1);
-        panelA.add(button2);
-        panelA.add(button3);
-        panelA.setPreferredSize(new Dimension(500,280));
+        panelInner.setLayout(null);
+        panelInner.add(materialSearchButton);
+        panelInner.add(gdtInstructionButton);
+        panelInner.add(overlapCalcButton);
+        panelInner.setPreferredSize(new Dimension(500,280));
 
-        main = new JPanel();
-        main.setLayout(new BoxLayout(main,BoxLayout.Y_AXIS));
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
 
-        main.add(panelUpper);
-       // main.add(head);
-        main.add(panelA);
+        mainPanel.add(panelInnerHeadline);
+        mainPanel.add(panelInner);
 
     }
 }

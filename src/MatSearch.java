@@ -4,16 +4,9 @@ import java.util.ArrayList;
 
 public class MatSearch {
 
-   private final  ArrayList<Steel> steellist = new ArrayList<>();
+    public ArrayList<Steel> dataReader() {
 
-    MatSearch() {
-
-        dataReader();
-        new FrameA(steellist);
-    }
-
-    public void dataReader() {
-
+        ArrayList<Steel> steelArrayList = new ArrayList<>();
         String line;
         String path1 = null;
         String path2 = null;
@@ -31,7 +24,7 @@ public class MatSearch {
 
                 FerriticStainlessSteel ss = new FerriticStainlessSteel(lista[0], lista[1], lista[2], lista[3]);
 
-                steellist.add(ss);
+                steelArrayList.add(ss);
 
             }
             reader.close();
@@ -57,7 +50,7 @@ public class MatSearch {
 
                 AusteniticStainlessSteel as = new AusteniticStainlessSteel(lista[0], lista[1], lista[2], lista[3]);
 
-                steellist.add(as);
+                steelArrayList.add(as);
 
             }
             reader.close();
@@ -70,6 +63,7 @@ public class MatSearch {
             System.out.println("Details:");
             e.printStackTrace();
         }
+        return steelArrayList;
     }
 }
 
