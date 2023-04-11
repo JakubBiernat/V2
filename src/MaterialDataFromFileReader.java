@@ -2,10 +2,9 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class MatSearch {
+public class MaterialDataFromFileReader {
 
     public ArrayList<Steel> dataReader() {
-
         ArrayList<Steel> steelArrayList = new ArrayList<>();
         String line;
         String path1 = null;

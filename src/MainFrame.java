@@ -4,16 +4,14 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 
     private JButton materialSearchButton, gdtInstructionButton, overlapCalcButton;
-    private JPanel mainPanel;
-
 
     MainFrame() {
-        createButtons();
-        createPanels();
         createFrame();
     }
 
     private void createFrame() {
+        createButtons();
+        JPanel mainPanel =createPanels();
         this.setTitle("Useful tool");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(1050,500);
@@ -35,7 +33,7 @@ public class MainFrame extends JFrame {
         materialSearchButton.setIcon(metalIcon);
         materialSearchButton.setBounds(100, 10, 200, 250);
         materialSearchButton.addActionListener(
-                (e)->{new FrameA(new MatSearch().dataReader());
+                (e)->{new MaterialEquivalentFrame();
                       System.out.println("button "+ materialSearchButton.getText()+" selected");} );
         materialSearchButton.setFocusable(false);
         materialSearchButton.setHorizontalTextPosition(JButton.CENTER);
@@ -77,22 +75,23 @@ public class MainFrame extends JFrame {
     }
 
     /*
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==button1){
-            new MatSearch();
-            System.out.println("button "+button1.getText()+" selected");
-        }
-        if(e.getSource()==button2){
-            System.out.println("button"+button2.getName()+"selected");
-        }
+     @Override
+     public void actionPerformed(ActionEvent e) {
+         if(e.getSource()==button1){
+             new MatSearch();
+             System.out.println("button "+button1.getText()+" selected");
+         }
+         if(e.getSource()==button2){
+             System.out.println("button"+button2.getName()+"selected");
+         }
 
-        if(e.getSource()==button3){
-            System.out.println("button"+button3.getName()+"selected");
-        }
-    }*/
+         if(e.getSource()==button3){
+             System.out.println("button"+button3.getName()+"selected");
+         }
+     }
+    */
 
-    private void createPanels(){
+    private JPanel createPanels(){
 
         JPanel panelInner =new JPanel();
         JPanel panelInnerHeadline =new JPanel();
@@ -114,11 +113,12 @@ public class MainFrame extends JFrame {
         panelInner.add(overlapCalcButton);
         panelInner.setPreferredSize(new Dimension(500,280));
 
-        mainPanel = new JPanel();
+        JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
 
         mainPanel.add(panelInnerHeadline);
         mainPanel.add(panelInner);
 
+        return mainPanel;
     }
 }
